@@ -7,22 +7,26 @@ from sprites import *
 
 pygame.init()
 
+clock = pygame.time.Clock()
+
 size = width, height = 600, 400
 black = 0,0,0
 
 screen = pygame.display.set_mode(size)
 
 #Init objects: playerShip, battalion of enemyShips
-playerShip = PlayerShip(20, 16)
+playerShip = PlayerShip([20, 16],[290,320])
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
+    keys = pygame.key.get_pressed() 
+    playerShip.update(keys)
 
     screen.fill(black)
+    screen.blit(playerShip.image,playerShip.rect)
     #TODO: Get a better way to do this
-    screen.blit(playerShip.image, [290, 320])
     # Update objects on screen
 
     pygame.display.flip()
-    time.sleep(0.1)
+    clock.tick(20)

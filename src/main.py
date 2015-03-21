@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import pygame, time
+import sys
 pygame.init()
 
 size = width, height = 600, 400

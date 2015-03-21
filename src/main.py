@@ -22,8 +22,8 @@ while True:
         if event.type == pygame.QUIT: sys.exit()
     keys = pygame.key.get_pressed() 
     playerShip.update(keys)
-
     screen.fill(black)
+    screen.blit(playerShip.bullet.image,playerShip.bullet.rect)
     screen.blit(playerShip.image,playerShip.rect)
     #TODO: Get a better way to do this
     # Update objects on screen

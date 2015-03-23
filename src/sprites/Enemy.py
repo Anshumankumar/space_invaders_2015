@@ -8,6 +8,7 @@ class Enemy(pygame.sprite.Sprite):
     """Player and opponent weapon"""
     enemyFlag = 0
     def __init__(self, size, pos, speed):
+        self.enemyFlag = 1
         self.image = pygame.Surface(size)
         self.image.fill(enemycolor)
         self.rect = self.image.get_rect()
@@ -17,7 +18,7 @@ class Enemy(pygame.sprite.Sprite):
         self.rect = self.rect.move(self._posX,self._posY)
         self._direction = "RIGHT"
 
-    def updateDirection(direction):
+    def updateDirection(self,direction):
         self._direction = direction
     
     def run(self):
@@ -25,7 +26,7 @@ class Enemy(pygame.sprite.Sprite):
         thread.start_new_thread(self.update,())
 
     def update(self):
-        if  ( self.enemyFlag == 0 ):
+        if  ( self.enemyFlag == 1 ):
             if (self._direction =="RIGHT" and self._posX > 20):
                 self._posX = self._posX -self.speed
                 self.rect =  self.rect.move(-self.speed,0)
@@ -33,14 +34,17 @@ class Enemy(pygame.sprite.Sprite):
             if (self._direction =="LEFT" and self._posX < 550):
                 self._posX = self._posX +self.speed
                 self.rect =  self.rect.move(self.speed,0)
+    
     def moveDown(self):
-        if ( self.enemyFlag == 0):
+        if ( self.enemyFlag == 1):
             self._posY = self._posY+10
             self.rect = self.rect.move(0,10) 
     
     def checkposX(self):
-        if self._posX < 20:
+        if self._posX < 40:
             return 1
-        if self._posY > 550:
+        if self._posX > 540:
             return -1
+        else:
+            return 0
     

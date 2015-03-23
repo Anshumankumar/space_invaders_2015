@@ -16,7 +16,7 @@ screen = pygame.display.set_mode(size)
 
 #Init objects: playerShip, battalion of enemyShips
 playerShip = PlayerShip([25, 20],[320,290])
-enemy_controller = Enemy_controller(23,5,screen)
+enemy_controller = Enemy_controller(14,6,screen)
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
@@ -26,6 +26,7 @@ while True:
     screen.blit(playerShip.bullet.image,playerShip.bullet.rect)
     screen.blit(playerShip.image,playerShip.rect)
     enemy_controller.blit()
+    enemy_controller.collision(playerShip.bullet)
     #TODO: Get a better way to do this
     # Update objects on screen
 

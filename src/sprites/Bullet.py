@@ -21,7 +21,9 @@ class Bullet(pygame.sprite.Sprite):
         thread.start_new_thread(self.update,())
 
     def update(self):
-        while ( self._posY > 10 and self._posY < 400 ):
+        while ( self._posY > 10 and self._posY < 400  ):
+            if (self.bulletFlag == 0):
+                break
             if (self._direction =="UP"):
                 self._posY = self._posY -10
                 self.rect =  self.rect.move(0,-10)

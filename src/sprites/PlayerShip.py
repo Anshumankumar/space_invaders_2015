@@ -1,6 +1,6 @@
 import pygame
 from Bullet import Bullet
-shipcolor = 100,233,125
+shipcolor = 255,233,0
 
 class PlayerShip(pygame.sprite.Sprite):
     """The player's own ship"""

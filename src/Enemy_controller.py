@@ -45,7 +45,7 @@ class Enemy_controller():
         for enemylist in self.enemyArray:
             for enemy in enemylist: 
                 if (enemy.enemyFlag == 1):
-                    if enemy.rect.colliderect(bullet.rect):
+                    if bullet.bulletFlag and enemy.rect.colliderect(bullet.rect):
                         enemy.enemyFlag = 0
                         enemy.rect =None
                         bullet.bulletFlag = 0

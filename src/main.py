@@ -15,7 +15,7 @@ black = 0,0,0
 screen = pygame.display.set_mode(size)
 
 #Init objects: playerShip, battalion of enemyShips
-playerShip = PlayerShip([25, 20],[320,290])
+playerShip = PlayerShip([320,290])
 enemy_controller = Enemy_controller(14,6,screen)
 while True:
     for event in pygame.event.get():
@@ -23,7 +23,7 @@ while True:
     keys = pygame.key.get_pressed() 
     playerShip.update(keys)
     screen.fill(black)
-    screen.blit(playerShip.bullet.image,playerShip.bullet.rect)
+    if playerShip.bullet.bulletFlag: screen.blit(playerShip.bullet.image,playerShip.bullet.rect)
     screen.blit(playerShip.image,playerShip.rect)
     enemy_controller.blit()
     enemy_controller.collision(playerShip.bullet)

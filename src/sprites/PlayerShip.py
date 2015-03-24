@@ -5,9 +5,8 @@ shipcolor = 255,233,0
 class PlayerShip(pygame.sprite.Sprite):
     """The player's own ship"""
 
-    def __init__(self, size, pos):
-        self.image = pygame.Surface(size)
-        self.image.fill(shipcolor)
+    def __init__(self, pos):
+        self.image = pygame.image.load("images/player-sprite.png")
         self.rect = self.image.get_rect()
         self._posX = pos[0]
         self._posY = pos[1]

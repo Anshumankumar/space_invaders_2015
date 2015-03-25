@@ -6,7 +6,9 @@ class PlayerShip(pygame.sprite.Sprite):
     """The player's own ship"""
 
     def __init__(self, pos):
-        self.image = pygame.image.load("images/player-sprite.png")
+        self.image = pygame.Surface([30,20])
+        self.image.fill(shipcolor)
+        #self.image = pygame.image.load("images/player-sprite.png")
         self.rect = self.image.get_rect()
         self.rect.move_ip(*pos)
         self.bullet = Bullet([0,0],"UP")

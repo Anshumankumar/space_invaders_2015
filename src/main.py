@@ -4,7 +4,7 @@ import pygame, time
 import sys
 
 from sprites import *
-from Enemy_controller import Enemy_controller
+from Controller import Controller
 pygame.init()
 
 clock = pygame.time.Clock()
@@ -13,10 +13,10 @@ size = width, height = 600, 400
 black = 0,0,0
 
 screen = pygame.display.set_mode(size)
-
+myfont = pygame.font.SysFont("monospace", 16)
 #Init objects: playerShip, battalion of enemyShips
 playerShip = PlayerShip([320,290])
-enemy_controller = Enemy_controller(14,6,screen)
+controller = Controller(14,6,screen)
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT: sys.exit()
@@ -25,8 +25,8 @@ while True:
     screen.fill(black)
     if playerShip.bullet.bulletFlag: screen.blit(playerShip.bullet.image,playerShip.bullet.rect)
     screen.blit(playerShip.image,playerShip.rect)
-    enemy_controller.blit()
-    enemy_controller.collision(playerShip.bullet)
+    controller.blit()
+    controller.collision(playerShip.bullet)
     #TODO: Get a better way to do this
     # Update objects on screen
 

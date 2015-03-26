@@ -6,8 +6,18 @@ enemycolor = 0,255,0
 
 class Enemy(pygame.sprite.Sprite):
     """Player and opponent weapon"""
+
+    #This flag see wether a enemy is alive
     enemyFlag = 0
+    
     def __init__(self, size, pos, speed):
+        """ Intialises the  enemy
+
+        arguments:
+        size --  A  list consisiting of length and breadth of enemy
+        pos -- A list consisting the position in x and y
+        speed -- The speed with which the enemy move in x direction
+        """
         self.enemyFlag = 1
         self.image = pygame.Surface(size)
         self.image.fill(enemycolor)

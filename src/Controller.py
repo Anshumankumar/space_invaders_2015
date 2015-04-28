@@ -23,7 +23,7 @@ class Controller():
 
     def blit(self):
         self.moveDownFlag =  self.moveDownFlag +1
-        self.checkDirection()
+        self.flipDirection()
         self._screen.blit(self.scoretext,(50,50))
         for enemylist in self.enemyArray:
             for enemy in enemylist:
@@ -36,7 +36,7 @@ class Controller():
         if (self.moveDownFlag  == 200):
             self.moveDownFlag = 0
 
-    def checkDirection(self):
+    def flipDirection(self):
         for enemylist in self.enemyArray:
             for enemy in enemylist:
                 if (enemy.enemyFlag == 1):

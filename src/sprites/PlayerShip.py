@@ -10,7 +10,7 @@ class PlayerShip(pygame.sprite.Sprite):
         arguments:
         pos --  a list consisting of x and y coordinate of player ship
         """
-        self.image = pygame.image.load("../../images/player-sprite.png")
+        self.image = pygame.image.load("images/player-sprite.png")
         self.rect = self.image.get_rect()
         self.rect.move_ip(*pos)
         # The player bullet 

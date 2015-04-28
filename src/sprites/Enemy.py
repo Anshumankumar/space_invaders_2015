@@ -9,7 +9,7 @@ class Enemy(pygame.sprite.Sprite):
 
     #This flag see wether a enemy is alive
     enemyFlag = 0
-    
+
     def __init__(self, size, pos, speed):
         """ Intialises the  enemy
 
@@ -28,7 +28,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def updateDirection(self,direction):
         self._direction = direction
-    
+
     def run(self):
         self.enemyFlag = 1
         thread.start_new_thread(self.update,())
@@ -40,12 +40,12 @@ class Enemy(pygame.sprite.Sprite):
 
             if (self._direction =="LEFT" and self.rect.x < 550):
                 self.rect.move_ip(self.speed,0)
-    
+
     def moveDown(self):
         if ( self.enemyFlag == 1):
             self.rect.y = self.rect.y+10
             self.rect = self.rect.move(0,10) 
-    
+
     def checkposX(self):
         if self.rect.x < 40:
             return 1
@@ -53,4 +53,4 @@ class Enemy(pygame.sprite.Sprite):
             return -1
         else:
             return 0
-    
+

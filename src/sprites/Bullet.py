@@ -15,7 +15,7 @@ class Bullet(pygame.sprite.Sprite):
         self._direction = direction
         pos[0] -= SIZE[0]/2
         self.rect.move_ip(*pos)
-    
+
     def run(self):
         self.bulletFlag = 1
         thread.start_new_thread(self.update,())

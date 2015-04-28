@@ -6,7 +6,7 @@ class PlayerShip(pygame.sprite.Sprite):
 
     def __init__(self, pos):
         """Initializes the player ship.
-        
+
         arguments:
         pos --  a list consisting of x and y coordinate of player ship
         """
@@ -15,7 +15,7 @@ class PlayerShip(pygame.sprite.Sprite):
         self.rect.move_ip(*pos)
         # The player bullet 
         self.bullet = Bullet([0,0],"UP")
-        
+
     def update(self,keys):
         """ Update the position of player ship based keys pressed
 

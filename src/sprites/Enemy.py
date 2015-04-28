@@ -29,10 +29,6 @@ class Enemy(pygame.sprite.Sprite):
     def updateDirection(self,direction):
         self._direction = direction
 
-    def run(self):
-        self.enemyFlag = 1
-        thread.start_new_thread(self.update,())
-
     def update(self):
         if  ( self.enemyFlag == 1 ):
             if (self._direction =="RIGHT" and self.rect.x > 20):

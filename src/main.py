@@ -15,7 +15,7 @@ black = 0,0,0
 screen = pygame.display.set_mode(size)
 myfont = pygame.font.SysFont("monospace", 16)
 #Init objects: playerShip, battalion of enemyShips
-playerShip = PlayerShip([320,290])
+playerShip = PlayerShip([320,350])
 controller = Controller(14,6,screen)
 while True:
     for event in pygame.event.get():

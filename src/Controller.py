@@ -21,22 +21,26 @@ class Controller():
             for j in range(self._columnNo):
                 enemy1 = Enemy([15,10],[60+i*30,80+j*25],1)
                 self.enemyArray[i].append(copy(enemy1))
-              #  self.enemyArray[i].append(1)
-        self.bullet1 = Bullet([0,0],"DOWN")
-        self.bullet2 = Bullet([0,0],"DOWN")
-        self.bullet3 = Bullet([0,0],"DOWN")
-        self.bullet4 = Bullet([0,0],"DOWN")
-        self.no_of_enemies = n*m
-
-    def blit(self):
-        if self.bullet1.bulletFlag == 0:
+        self.bullet = []
+        for i in range(0,3):
+            self.bullet.append(Bullet([0,0],"DOWN"))
+    
+    def bulletUpdate(self,i):
+        if self.bullet[i].bulletFlag == 0:
             random_row = randint(0,self._rowNo-1)
             random_column = randint(0,self._columnNo-1)
+            if (self.enemyArray[random_row][random_column]. \
+                    enemyFlag != 1):
+                return
             bullet_x = self.enemyArray[random_row][random_column].rect.x
             bullet_y = self.enemyArray[random_row][random_column].rect.y
-            self.bullet1 = Bullet([bullet_x,bullet_y],"DOWN")
-            self.bullet1.run()
-        self._screen.blit(self.bullet1.image,self.bullet1.rect)
+            self.bullet[i] = Bullet([bullet_x,bullet_y],"DOWN")
+            self.bullet[i].run()
+    
+    def blit(self):
+        for i in range(0,3):
+            self.bulletUpdate(i)
+            self._screen.blit(self.bullet[i].image,self.bullet[i].rect)
         self.moveDownFlag =  self.moveDownFlag +1
         self.flipDirection()
         self._screen.blit(self.scoretext,(50,50))

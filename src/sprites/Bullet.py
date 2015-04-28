@@ -21,13 +21,13 @@ class Bullet(pygame.sprite.Sprite):
         thread.start_new_thread(self.update,())
 
     def update(self):
-        while ( self.rect.y > 10 and self.rect.y < 400 ):
+        while ( self.rect.y > 10 and self.rect.y < 380 ):
             if (self.bulletFlag == 0):
                 break
             if (self._direction =="UP"):
                 self.rect.move_ip(0,-10)
             if (self._direction =="DOWN"):
-                self.rect.move_ip(0,10)
+                self.rect.move_ip(0,8)
             time.sleep(0.05)
         #Remove bullet from screen
         self.bulletFlag = 0

@@ -22,6 +22,7 @@ while True:
         if event.type == pygame.QUIT: sys.exit()
     keys = pygame.key.get_pressed() 
     playerShip.update(keys)
+    playerShip.maybeShoot(keys)
     screen.fill(black)
     if playerShip.bullet.bulletFlag: screen.blit(playerShip.bullet.image,playerShip.bullet.rect)
     screen.blit(playerShip.image,playerShip.rect)

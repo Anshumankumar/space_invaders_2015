@@ -20,12 +20,19 @@ class PlayerShip(pygame.sprite.Sprite):
         """ Update the position of player ship based keys pressed
 
         arguments:
-        keys -- A list consisting of keys preseed  
+        keys -- A list consisting of keys preseed
         """
         if ( keys[pygame.K_LEFT] and self.rect.x > 30 ):
             self.rect.move_ip(-8,0)
         if ( keys[pygame.K_RIGHT] and self.rect.x < 550 ):
             self.rect.move_ip(8,0)
+
+    def maybeShoot(self, keys):
+        """ Shoots a bullet if the player pressed the trigger
+
+        arguments:
+        keys -- A list consisting of keys preseed
+        """
         if ( keys[pygame.K_SPACE] and self.bullet.bulletFlag == 0):
             self.bullet = Bullet([self.rect.x+self.rect.width/2,
                                  self.rect.y-10],"UP")

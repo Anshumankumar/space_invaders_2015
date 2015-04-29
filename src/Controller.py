@@ -35,6 +35,7 @@ class Controller():
             self.bullet[i].bulletFlag = -delay
             sched.enter(delay, 1, self.bullet[i].run, ())
         thread.start_new_thread(sched.run, ())
+        self.boss = None
     
     def bulletUpdate(self,i):
         if self.bullet[i].bulletFlag == 0:
@@ -69,6 +70,12 @@ class Controller():
         if (self.moveDownFlag  == 200):
             self.moveDownFlag = 0
 
+        if self.boss is not None:
+            self.boss.update()
+            self._screen.blit(self.boss.image, self.boss.rect)
+        elif (self._score % 1000 == 0):
+            self.boss = BossEnemy((0,0));
+
 
 
     def flipDirection(self):
@@ -84,6 +91,12 @@ class Controller():
         for enemylist in self.enemyArray:
             for enemy in enemylist: 
                 self.collision_check(enemy,bullet)
+        if self.boss is not None and bullet.bulletFlag > 0:
+            if self.boss.rect.colliderect(bullet.rect):
+                self._score += 600;
+                self.scoretext = self._font.render("Score = "+str(self._score), 1, (0,255,0))
+                self.boss = None
+                bullet.bulletFlag = 0
 
     def collision_check(self,enemy,bullet):
         if (enemy.enemyFlag == 1):

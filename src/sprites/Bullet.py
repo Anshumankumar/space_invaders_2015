@@ -34,5 +34,5 @@ class Bullet(pygame.sprite.Sprite):
         #For resurrecting bullets
         self.bulletFlag = randint(-20, 0)
         while self.bulletFlag <= 0:
-            time.sleep(0.5)
+            time.sleep(0.1)
             self.bulletFlag += 1

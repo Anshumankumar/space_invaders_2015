@@ -30,7 +30,7 @@ class Controller():
         self.bullet = []
         for i in range(0,3):
             self.bullet.append(Bullet([0,0],"DOWN"))
-            delay = randint(1, 21)
+            delay = randint(1, 7)
             self.bullet[i].bulletFlag = -delay
             sched.enter(delay, 1, self.bullet[i].run, ())
         thread.start_new_thread(sched.run, ())

@@ -10,6 +10,7 @@ class Controller():
     def __init__(self,n,m,screen):
         self._font = pygame.font.SysFont("monospace", 16)
         self.scoretext = self._font.render("Score = "+str(self._score), 1, (0,255,0))
+        self.lifetext = self._font.render("Lives = "+str(self._lives), 1, (0,255,0))
         self._screen = screen
         self._rowNo = n;
         self._columnNo = m;
@@ -44,6 +45,7 @@ class Controller():
         self.moveDownFlag =  self.moveDownFlag +1
         self.flipDirection()
         self._screen.blit(self.scoretext,(50,50))
+        self._screen.blit(self.lifetext,(450,50))
         for enemylist in self.enemyArray:
             for enemy in enemylist:
                 if (enemy.enemyFlag == 1):
@@ -80,3 +82,17 @@ class Controller():
                 self._score = self._score + 100;
                 self.scoretext = self._font.render("Score = "+str(self._score), 1, (0,255,0))
                 self._screen.blit(self.scoretext,(50,50))
+    
+    def player_collision_check(self,player):
+        for cbullet in self.bullet:
+            if player.rect.colliderect(cbullet.rect):
+                self._lives = self._lives -1;
+                self.lifetext = self._font.render(
+                        "Lives = "+str(self._lives), 1, (0,255,0))
+                cbullet.bulletFlag = 0
+    
+    def gameover(self):
+        if self._lives  < 0:
+            return True
+        else:
+            return False

@@ -24,13 +24,14 @@ class Bullet(pygame.sprite.Sprite):
     def update(self):
         while ( self.rect.y > 10 and self.rect.y < 380 ):
             if (self.bulletFlag <= 0):
-                break
+                return
             if (self._direction =="UP"):
                 self.rect.move_ip(0,-10)
             if (self._direction =="DOWN"):
                 self.rect.move_ip(0,8)
             time.sleep(0.05)
-        #Remove bullet from screen
+
+        #For resurrecting bullets
         self.bulletFlag = randint(-20, 0)
         while self.bulletFlag <= 0:
             time.sleep(0.5)

@@ -15,7 +15,7 @@ class PlayerShip(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.move_ip(*pos)
         # The player bullet 
-        self.bullet = Bullet([0,0],"UP")
+        self.bullet = Bullet([0,0],"UP", isEnemyBullet=False)
 
     def update(self,keys):
         """ Update the position of player ship based keys pressed

@@ -9,13 +9,14 @@ SIZE = [4,10]
 class Bullet(pygame.sprite.Sprite):
     """Player and opponent weapon"""
     bulletFlag = 0
-    def __init__(self, pos, direction):
+    def __init__(self, pos, direction, isEnemyBullet=True):
         self.image = pygame.Surface(SIZE)
         self.image.fill(BULLETCOLOR)
         self.rect = self.image.get_rect()
         self._direction = direction
         pos[0] -= SIZE[0]/2
         self.rect.move_ip(*pos)
+        self.isEnemyBullet = isEnemyBullet
 
     def run(self):
         self.bulletFlag = 1
@@ -32,7 +33,10 @@ class Bullet(pygame.sprite.Sprite):
             time.sleep(0.05)
 
         #For resurrecting bullets
-        self.bulletFlag = randint(-20, 0)
-        while self.bulletFlag <= 0:
-            time.sleep(0.1)
-            self.bulletFlag += 1
+        if self.isEnemyBullet:
+            self.bulletFlag = randint(-20, 0)
+            while self.bulletFlag < 0:
+                time.sleep(0.1)
+                self.bulletFlag += 1
+        else:
+            self.bulletFlag = 0

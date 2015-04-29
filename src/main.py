@@ -16,7 +16,7 @@ size = width, height = 600, 400
 black = 0,0,0
 
 #Init objects: playerShip, battalion of enemyShips
-def play():
+def play(speed):
     screen = pygame.display.set_mode(size)
     myfont = pygame.font.SysFont("monospace", 30)
     keys = pygame.key.get_pressed()
@@ -43,8 +43,8 @@ def play():
 
     #Main Run
     playerShip = PlayerShip([320,350])
-    controller = Controller(14,6,screen)
-    while not controller.gameover():
+    controller = Controller(14,6,screen,speed)
+    while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
         keys = pygame.key.get_pressed() 
@@ -58,6 +58,9 @@ def play():
         controller.player_collision_check(playerShip)
         pygame.display.flip()
         clock.tick(30)
+        if (controller.gameover()):
+            flag = 0
+            break
     audio.gameOver()
     
     # Post run
@@ -79,9 +82,14 @@ def play():
         clock.tick(30)
         screen.fill(black)
         keys = pygame.key.get_pressed()
-
+    return flag
 
 
 if __name__ == '__main__':
+    speed = 1
     while True:
-        play()
+        flag = play(speed)
+        if (flag == 0):
+            speed = 1
+        else:
+            speed = speed+1

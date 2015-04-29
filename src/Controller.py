@@ -13,20 +13,22 @@ class Controller():
     _score = 0;
     _lives = 3;
     _gameover = 0
-    def __init__(self,n,m,screen):
+    def __init__(self,n,m,screen,speed):
         self._font = pygame.font.SysFont("monospace", 16)
-        self.scoretext = self._font.render("Score = "+str(self._score), 1, (0,255,0))
-        self.lifetext = self._font.render("Lives = "+str(self._lives), 1, (0,255,0))
+        self.scoretext = self._font.render("Score: "+str(self._score), 1, (0,255,0))
+        self.lifetext = self._font.render("Lives: "+str(self._lives), 1, (0,255,0))
+        self.leveltext = self._font.render("Level: "+str(speed), 1, (0,255,0))
         self._screen = screen
         self._rowNo = n;
         self._columnNo = m;
+        self.no_of_enemies = n*m
         self.direction ="LEFT"
         self.moveDownFlag = 0
         self.enemyArray = []
         for i in range(self._rowNo):
             self.enemyArray.append([])
             for j in range(self._columnNo):
-                enemy1 = Enemy([15,10],[60+i*30,80+j*25],1)
+                enemy1 = Enemy([15,10],[60+i*30,80+j*25],speed)
                 self.enemyArray[i].append(copy(enemy1))
         self.bullet = []
         for i in range(0,3):
@@ -59,6 +61,7 @@ class Controller():
         self.flipDirection()
         self._screen.blit(self.scoretext,(50,50))
         self._screen.blit(self.lifetext,(450,50))
+        self._screen.blit(self.leveltext,(250,50))
         for enemylist in self.enemyArray:
             for enemy in enemylist:
                 if (enemy.enemyFlag == 1):
@@ -111,7 +114,8 @@ class Controller():
                 self._score = self._score + 100;
                 self.scoretext = self._font.render("Score = "+str(self._score), 1, (0,255,0))
                 self._screen.blit(self.scoretext,(50,50))
-             
+                self.no_of_enemies = self.no_of_enemies -1 
+    
     def player_collision_check(self,player):
         for cbullet in self.bullet:
             if cbullet.bulletFlag > 0 and player.rect.colliderect(cbullet.rect):
@@ -126,3 +130,9 @@ class Controller():
             return True
         else:
             return False
+
+    def level_complete():
+        if self.no_of_enemies == 0:
+            return 1
+        else:
+            return 0

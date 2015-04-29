@@ -98,6 +98,7 @@ class Controller():
     def player_collision_check(self,player):
         for cbullet in self.bullet:
             if cbullet.bulletFlag > 0 and player.rect.colliderect(cbullet.rect):
+                audio.playerHit()
                 self._lives = self._lives -1;
                 self.lifetext = self._font.render(
                         "Lives = "+str(self._lives), 1, (0,255,0))

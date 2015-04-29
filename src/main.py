@@ -8,6 +8,7 @@ pygame.mixer.init(11025, 8, 1)
 
 from sprites import *
 from Controller import Controller
+from Audio import audio
 
 clock = pygame.time.Clock()
 
@@ -57,6 +58,7 @@ def play():
         controller.player_collision_check(playerShip)
         pygame.display.flip()
         clock.tick(30)
+    audio.gameOver()
     
     # Post run
     blinkflag = 0

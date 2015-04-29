@@ -1,6 +1,7 @@
 import pygame
 import thread
 import time
+from random import randint
 
 BULLETCOLOR = 100,233,233
 SIZE = [4,10]
@@ -22,7 +23,7 @@ class Bullet(pygame.sprite.Sprite):
 
     def update(self):
         while ( self.rect.y > 10 and self.rect.y < 380 ):
-            if (self.bulletFlag == 0):
+            if (self.bulletFlag <= 0):
                 break
             if (self._direction =="UP"):
                 self.rect.move_ip(0,-10)
@@ -30,4 +31,7 @@ class Bullet(pygame.sprite.Sprite):
                 self.rect.move_ip(0,8)
             time.sleep(0.05)
         #Remove bullet from screen
-        self.bulletFlag = 0
+        self.bulletFlag = randint(-20, 0)
+        while self.bulletFlag <= 0:
+            time.sleep(0.5)
+            self.bulletFlag += 1

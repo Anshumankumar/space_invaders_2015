@@ -48,7 +48,7 @@ def play():
         playerShip.update(keys)
         playerShip.maybeShoot(keys)
         screen.fill(black)
-        if playerShip.bullet.bulletFlag: screen.blit(playerShip.bullet.image,playerShip.bullet.rect)
+        if playerShip.bullet.bulletFlag > 0: screen.blit(playerShip.bullet.image,playerShip.bullet.rect)
         screen.blit(playerShip.image,playerShip.rect)
         controller.blit()
         controller.collision(playerShip.bullet)

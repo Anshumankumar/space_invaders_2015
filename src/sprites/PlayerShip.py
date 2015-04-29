@@ -33,7 +33,7 @@ class PlayerShip(pygame.sprite.Sprite):
         arguments:
         keys -- A list consisting of keys preseed
         """
-        if ( keys[pygame.K_SPACE] and self.bullet.bulletFlag == 0):
+        if ( keys[pygame.K_SPACE] and self.bullet.bulletFlag <= 0):
             self.bullet = Bullet([self.rect.x+self.rect.width/2,
                                  self.rect.y-10],"UP")
             self.bullet.run()

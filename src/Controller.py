@@ -1,8 +1,12 @@
 import pygame
 import time
+import thread
 from copy import copy
 from random import randint
 from sprites import *
+from sched import scheduler
+
+sched = scheduler(time.time, time.sleep)
 
 class Controller():
     _score = 0;
@@ -25,6 +29,10 @@ class Controller():
         self.bullet = []
         for i in range(0,3):
             self.bullet.append(Bullet([0,0],"DOWN"))
+            delay = randint(1, 21)
+            self.bullet[i].bulletFlag = -delay
+            sched.enter(delay, 1, self.bullet[i].run, ())
+        thread.start_new_thread(sched.run, ())
     
     def bulletUpdate(self,i):
         if self.bullet[i].bulletFlag == 0:
@@ -41,7 +49,8 @@ class Controller():
     def blit(self):
         for i in range(0,3):
             self.bulletUpdate(i)
-            self._screen.blit(self.bullet[i].image,self.bullet[i].rect)
+            if self.bullet[i].bulletFlag > 0:
+                self._screen.blit(self.bullet[i].image,self.bullet[i].rect)
         self.moveDownFlag =  self.moveDownFlag +1
         self.flipDirection()
         self._screen.blit(self.scoretext,(50,50))
@@ -75,7 +84,7 @@ class Controller():
 
     def collision_check(self,enemy,bullet):
         if (enemy.enemyFlag == 1):
-            if bullet.bulletFlag and enemy.rect.colliderect(bullet.rect):
+            if bullet.bulletFlag > 0 and enemy.rect.colliderect(bullet.rect):
                 enemy.enemyFlag = 0
                 enemy.rect =None
                 bullet.bulletFlag = 0
@@ -85,7 +94,7 @@ class Controller():
     
     def player_collision_check(self,player):
         for cbullet in self.bullet:
-            if player.rect.colliderect(cbullet.rect):
+            if cbullet.bulletFlag > 0 and player.rect.colliderect(cbullet.rect):
                 self._lives = self._lives -1;
                 self.lifetext = self._font.render(
                         "Lives = "+str(self._lives), 1, (0,255,0))

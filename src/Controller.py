@@ -4,6 +4,7 @@ import thread
 from copy import copy
 from random import randint
 from sprites import *
+from Audio import audio
 from sched import scheduler
 
 sched = scheduler(time.time, time.sleep)
@@ -44,6 +45,7 @@ class Controller():
             bullet_x = self.enemyArray[random_row][random_column].rect.x
             bullet_y = self.enemyArray[random_row][random_column].rect.y
             self.bullet[i] = Bullet([bullet_x,bullet_y],"DOWN")
+            audio.enemyFire()
             self.bullet[i].run()
     
     def blit(self):
@@ -87,6 +89,7 @@ class Controller():
             if bullet.bulletFlag > 0 and enemy.rect.colliderect(bullet.rect):
                 enemy.enemyFlag = 0
                 enemy.rect =None
+                audio.hit()
                 bullet.bulletFlag = 0
                 self._score = self._score + 100;
                 self.scoretext = self._font.render("Score = "+str(self._score), 1, (0,255,0))

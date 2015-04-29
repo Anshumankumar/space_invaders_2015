@@ -1,5 +1,6 @@
 import pygame
 from Bullet import Bullet
+from Audio import audio
 
 class PlayerShip(pygame.sprite.Sprite):
     """The player's own ship"""
@@ -36,4 +37,5 @@ class PlayerShip(pygame.sprite.Sprite):
         if ( keys[pygame.K_SPACE] and self.bullet.bulletFlag <= 0):
             self.bullet = Bullet([self.rect.x+self.rect.width/2,
                                  self.rect.y-10],"UP")
+            audio.fire()
             self.bullet.run()

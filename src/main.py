@@ -3,9 +3,11 @@
 import pygame, time
 import sys
 
+pygame.init()
+pygame.mixer.init(11025, 8, 1)
+
 from sprites import *
 from Controller import Controller
-pygame.init()
 
 clock = pygame.time.Clock()
 

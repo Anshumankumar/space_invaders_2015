@@ -12,6 +12,7 @@ sched = scheduler(time.time, time.sleep)
 class Controller():
     _score = 0;
     _lives = 3;
+    _gameover = 0
     def __init__(self,n,m,screen):
         self._font = pygame.font.SysFont("monospace", 16)
         self.scoretext = self._font.render("Score = "+str(self._score), 1, (0,255,0))
@@ -86,6 +87,9 @@ class Controller():
 
     def collision_check(self,enemy,bullet):
         if (enemy.enemyFlag == 1):
+            if (enemy.reached_destiny() == 1):
+                self._gameover = 1
+
             if bullet.bulletFlag > 0 and enemy.rect.colliderect(bullet.rect):
                 enemy.enemyFlag = 0
                 enemy.rect =None
@@ -94,7 +98,7 @@ class Controller():
                 self._score = self._score + 100;
                 self.scoretext = self._font.render("Score = "+str(self._score), 1, (0,255,0))
                 self._screen.blit(self.scoretext,(50,50))
-    
+             
     def player_collision_check(self,player):
         for cbullet in self.bullet:
             if cbullet.bulletFlag > 0 and player.rect.colliderect(cbullet.rect):
@@ -105,7 +109,7 @@ class Controller():
                 cbullet.bulletFlag = 0
     
     def gameover(self):
-        if self._lives  < 0:
+        if self._lives  < 0 or self._gameover == 1:
             return True
         else:
             return False

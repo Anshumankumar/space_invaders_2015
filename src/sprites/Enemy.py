@@ -50,3 +50,9 @@ class Enemy(pygame.sprite.Sprite):
         else:
             return 0
 
+    def reached_destiny(self):
+        if self.rect.y > 350:
+            return 1
+        else:
+            return 0
+

@@ -1,5 +1,5 @@
 import pygame
-import thread
+import _thread
 import time
 from random import randint
 
@@ -20,7 +20,7 @@ class Bullet(pygame.sprite.Sprite):
 
     def run(self):
         self.bulletFlag = 1
-        thread.start_new_thread(self.update,())
+        _thread.start_new_thread(self.update,())
 
     def update(self):
         while ( self.rect.y > 10 and self.rect.y < 380 ):

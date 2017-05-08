@@ -1,5 +1,5 @@
 import pygame
-from Bullet import Bullet
+from .Bullet import Bullet
 from Audio import audio
 
 class PlayerShip(pygame.sprite.Sprite):

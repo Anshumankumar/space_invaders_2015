@@ -1,9 +1,5 @@
-import PlayerShip
-import Bullet
-import Enemy
-import BossEnemy
+from .PlayerShip import PlayerShip
+from .Bullet import Bullet
+from .Enemy import Enemy
+from .BossEnemy import BossEnemy
 
-PlayerShip = PlayerShip.PlayerShip
-Bullet = Bullet.Bullet
-Enemy = Enemy.Enemy
-BossEnemy = BossEnemy.BossEnemy

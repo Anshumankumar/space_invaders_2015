@@ -1,5 +1,5 @@
 import pygame
-import thread
+import _thread
 import time
 
 enemycolor = 0,255,0

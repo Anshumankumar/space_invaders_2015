@@ -1,6 +1,6 @@
 import pygame
 import time
-import thread
+import _thread
 from copy import copy
 from random import randint
 from sprites import *
@@ -36,7 +36,7 @@ class Controller():
             delay = randint(1, 7)
             self.bullet[i].bulletFlag = -delay
             sched.enter(delay, 1, self.bullet[i].run, ())
-        thread.start_new_thread(sched.run, ())
+        _thread.start_new_thread(sched.run, ())
         self.boss = None
     
     def bulletUpdate(self,i):
